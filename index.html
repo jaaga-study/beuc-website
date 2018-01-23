@@ -25,7 +25,19 @@
     <link rel="stylesheet" href="css/main.css">    
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" type="text/css" href="css/colors/preset.css">
-
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 50%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
       <div class="menu-wrap">
@@ -194,10 +206,6 @@
       </div>
     </section> 
 
-
-
-
-
     <!-- Features Section Start -->
     <section id="features" class="section" data-stellar-background-ratio="0.2">
       <div class="container">
@@ -277,8 +285,11 @@
         </div>
       </div>
     </section>
-    <!-- Features Section End -->    
-
+    <!-- Features Section End -->  
+    <!-- Map Section with unicyclists in Bangalore -->  
+    <section id="map">
+      
+    </section>
     <!-- Start Video promo Section -->
     <section class="video-promo section" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -809,6 +820,45 @@
     <script src="js/form-validator.min.js"></script>
     <script src="js/contact-form-script.js"></script>     
     <script src="js/main.js"></script>
-    
+
+    <script>
+
+      function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: {lat: 12.9469117, lng: 77.5980765}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      }
+
+      var locations = [
+        {lat: 12.9657, lng: 77.6001},
+        {lat: 12.8587, lng: 77.1234},
+        {lat: 12.8828, lng: 77.9912},
+        {lat: 12.1112, lng: 76.9213}
+      ];
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANa_CveJbNydlXT4p5ekmAz0NFFzbPPzM&callback=initMap">
+    </script>
   </body>
 </html>
