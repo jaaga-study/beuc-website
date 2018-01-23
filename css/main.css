@@ -344,7 +344,7 @@ a:not([href]):not([tabindex]):hover {
   color: #556dad;
 }
 .overlay-2 {
-  background: rgb(28, 115, 204, 0) !important;
+  background: rgba(28, 115, 204, 0) !important;
 }
 /* ==========================================================================
    About Section Style
